@@ -16,6 +16,12 @@
     <form id="loginForm">
       <label>Email<input name="email" type="email" autocomplete="username" required></label>
       <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
+
+      <div style="text-align: right; margin: 5px 0 15px 0;">
+    <button type="button" id="forgotBtn" style="background: none; border: none; color: #ffd21c; cursor: pointer; font-size: 0.85rem; text-decoration: underline;">
+      Forgot Password?
+    </button>
+  </div>
       <button>Sign In</button>
       <p id="status"></p>
     </form>
@@ -25,8 +31,7 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
+    import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     // Your exact Firebase configuration from the console
     const firebaseConfig = { 
   apiKey : "AIzaSyCjFL4edy1fX9rprfCZ9-MYavdsk9hGJwc" , 
@@ -59,6 +64,24 @@
         statusEl.className = "error";
       }
     });
+    // Handle Forgot Password Click
+document.querySelector("#forgotBtn")?.addEventListener("click", async () => {
+  const emailInput = document.querySelector('input[name="email"]');
+  const email = emailInput?.value.trim();
+
+  if (!email) {
+    alert("Please enter your email address in the field above first.");
+    return;
+  }
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    alert(`Password reset link sent to ${email}. Check your inbox!`);
+  } catch (err) {
+    console.error(err);
+    alert("Error: " + err.message);
+  }
+});
   </script>
 </body>
 </html>
