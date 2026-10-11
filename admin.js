@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut, updatePassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged, sendPasswordResetEmail, signOut, updatePassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { getDatabase, ref, get, remove, push, set, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 const firebaseConfig = { 
@@ -199,7 +199,7 @@ const passwordForm = document.querySelector("#passwordForm");
 if (passwordForm) {
   passwordForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const newPasswordInput = document.querySelector("#newPassword").value;
+    const newPasswordInput = passwordForm.querySelector("#newPassword").value;
     const statusEl = document.querySelector("#passwordStatus");
     const user = auth.currentUser;
 
@@ -222,12 +222,15 @@ if (passwordForm) {
       statusEl.className = "error";
     }
   });
-}// Handle Forgot Password
-const forgotPasswordBtn = document.querySelector("#forgotPasswordBtn"); // Replace with your actual button/link selector
-if (forgotPasswordBtn) {
-  forgotPasswordBtn.addEventListener("click", async (e) => {
+}
+
+// Handle Forgot Password
+const forgotPasswordForm = document.querySelector("#forgotPasswordForm");
+if (forgotPasswordForm) {
+  forgotPasswordForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const emailInput = document.querySelector('input[name="email"]').value.trim().toLowerCase();
+
+    const emailInput = forgotPasswordForm.querySelector('input[name="email"]').value.trim().toLowerCase();
     const ADMIN_EMAILS = ["hilltechmediagroup@gmail.com"];
 
     if (!emailInput) {
@@ -243,6 +246,7 @@ if (forgotPasswordBtn) {
     try {
       await sendPasswordResetEmail(auth, emailInput);
       alert(`Password reset link sent to ${emailInput}. Check your inbox!`);
+      forgotPasswordForm.reset();
     } catch (error) {
       alert("Error sending password reset email: " + error.message);
     }

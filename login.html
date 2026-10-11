@@ -67,10 +67,17 @@
     // Handle Forgot Password Click
 document.querySelector("#forgotBtn")?.addEventListener("click", async () => {
   const emailInput = document.querySelector('input[name="email"]');
-  const email = emailInput?.value.trim();
+  const email = emailInput?.value.trim().toLowerCase();
+  const ADMIN_EMAIL = "hilltechmediagroup@gmail.com";
 
   if (!email) {
     alert("Please enter your email address in the field above first.");
+    return;
+  }
+
+  // Restrict password reset to only the admin email
+  if (email !== ADMIN_EMAIL) {
+    alert("Access Denied: Password reset is only available for the authorized admin account.");
     return;
   }
 
