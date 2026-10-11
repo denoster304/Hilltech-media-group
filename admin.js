@@ -222,4 +222,29 @@ if (passwordForm) {
       statusEl.className = "error";
     }
   });
+}// Handle Forgot Password
+const forgotPasswordBtn = document.querySelector("#forgotPasswordBtn"); // Replace with your actual button/link selector
+if (forgotPasswordBtn) {
+  forgotPasswordBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const emailInput = document.querySelector('input[name="email"]').value.trim().toLowerCase();
+    const ADMIN_EMAILS = ["hilltechmediagroup@gmail.com"];
+
+    if (!emailInput) {
+      alert("Please enter your email address first.");
+      return;
+    }
+
+    if (!ADMIN_EMAILS.includes(emailInput)) {
+      alert("Access Denied: Password reset is only available for authorized admin accounts.");
+      return;
+    }
+
+    try {
+      await sendPasswordResetEmail(auth, emailInput);
+      alert(`Password reset link sent to ${emailInput}. Check your inbox!`);
+    } catch (error) {
+      alert("Error sending password reset email: " + error.message);
+    }
+  });
 }
