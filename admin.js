@@ -64,8 +64,10 @@ async function loadDashboardData() {
               ${optionsHtml}
             </select>
           </td>
-          <td><button class="small copy-btn" data-copy="${esc(x.phone || "")}">Copy phone</button></td>
-        </tr>
+         <td>
+      <button class="small copy-btn" data-copy="${esc(x.phone || "")}">Copy phone</button>
+      <button class="small danger delete-booking" data-delete="${x.id}" style="background: #ff4444; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; margin-left: 5px;">Delete</button>
+    </td>
       `;
     }).join("") || `<tr><td colspan="6">No bookings yet.</td></tr>`;
 
@@ -170,6 +172,16 @@ document.addEventListener("click", async e => {
     if (confirm("Delete this portfolio item?")) {
       try {
         await remove(ref(db, `portfolio/${e.target.dataset.delete}`));
+        loadDashboardData();
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+  }
+  if (e.target.classList.contains("delete-booking")) {
+    if (confirm("Delete this booking?")) {
+      try {
+        await remove(ref(db, `bookings/${e.target.dataset.delete}`));
         loadDashboardData();
       } catch (err) {
         alert(err.message);
