@@ -49,3 +49,117 @@
     flex-wrap: wrap;
     gap: 20px;
   }
+ .booking-section {
+  padding: 60px 20px;
+  background-color: #0b0c10;
+  display: flex;
+  justify-content: center;
+}
+
+.booking-card {
+  width: 100%;
+  max-width: 900px;
+  background: #121318;
+  border: 1px solid #23252d;
+  border-radius: 16px;
+  padding: 35px 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.booking-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 28px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  grid-column: span 2;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.form-group label .optional {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #8a8d9b;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 18px;
+  background-color: #08090c;
+  border: 1px solid #1e2029;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #5d6171;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+.booking-submit-btn {
+  width: 100%;
+  padding: 15px;
+  background: #ffd21c;
+  color: #000000;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-top: 10px;
+}
+
+.booking-submit-btn:hover {
+  background: #e0e0e0;
+}
+
+#bookingStatus {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+#bookingStatus.success { color: #4ade80; }
+#bookingStatus.error { color: #f87171; }
+
+@media (max-width: 768px) {
+  .booking-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-group.full-width {
+    grid-column: span 1;
+  }
+  .booking-card {
+    padding: 24px 20px;
+  }
+}
+.reveal {
+  opacity: 1 !important;
+  transform: none !important;
+}
