@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { getDatabase, ref, push, set, query, orderByChild, equalTo, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 // Firebase Configuration
 const firebaseConfig = {
@@ -19,7 +19,7 @@ const db = getDatabase(app);
 // Handle Booking Submission
 async function handleBooking(e) {
   e.preventDefault();
-  
+
   const form = e.currentTarget;
   const statusEl = document.getElementById("bookingStatus");
   const formData = new FormData(form);
@@ -46,7 +46,6 @@ async function handleBooking(e) {
   };
 
   try {
-    // Save to Firebase Database under "bookings"
     const bookingsRef = ref(db, "bookings");
     const newBookingRef = push(bookingsRef);
     await set(newBookingRef, bookingData);
@@ -56,10 +55,9 @@ async function handleBooking(e) {
       statusEl.className = "status success";
     }
 
-    // Format WhatsApp message for admin (+254 798 844 291)
     const adminPhone = "254798844291";
     const textMessage = 
-`🚨 *NEW BOOKING REQUEST - HILLTECH MEDIA GROUP*
+`*NEW BOOKING REQUEST - HILLTECH MEDIA GROUP*
 
 👤 *Client Name:* ${bookingData.name}
 📧 *Email:* ${bookingData.email}
@@ -69,18 +67,17 @@ async function handleBooking(e) {
 📍 *Location:* ${bookingData.location}
 💰 *Budget:* ${bookingData.budget}
 
-💬 *Project Details:*
+📝 *Project Details:*
 ${bookingData.details}`;
 
     const whatsappUrl = `https://wa.me/${adminPhone}?text=${encodeURIComponent(textMessage)}`;
-    
-    // Redirect after a brief moment so the success message renders
+
     setTimeout(() => {
       window.location.href = whatsappUrl;
     }, 1000);
 
   } catch (err) {
-    console.error("Firebase submission error:", err);
+    console.error("Booking error:", err);
     if (statusEl) {
       statusEl.textContent = "Failed to send booking. Check console for details.";
       statusEl.className = "status error";
