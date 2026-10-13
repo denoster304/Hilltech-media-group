@@ -188,3 +188,144 @@
 .footer-box a:hover {
   color: #ffd700;
 }
+/* Footer Container */
+.footer {
+  background-color: #0d0d0d;
+  padding: 50px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Card Boxes Layout */
+.footer-boxes-container {
+  display: flex;
+  gap: 25px;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.footer-box {
+  border: 1px solid #332a15;
+  border-radius: 16px;
+  background: #111111;
+  padding: 30px 35px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.socials-box {
+  min-width: 320px;
+}
+
+.links-box {
+  min-width: 220px;
+}
+
+/* Titles */
+.box-title {
+  color: #d4af37; /* Gold heading color */
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+/* Lists */
+.social-links-list,
+.footer-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.social-links-list a,
+.footer-links-list a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: color 0.2s ease;
+}
+
+.social-links-list a:hover,
+.footer-links-list a:hover {
+  color: #d4af37;
+}
+
+/* Call Us Link inside Box */
+.call-us-item {
+  margin-top: 25px;
+  padding-top: 15px;
+}
+
+.call-us-item a {
+  color: #d4af37;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer {
+  background-color: #0d0d0d;
+  padding: 50px 40px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid var(--line);
+}
+
+.footer-bottom {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 40px;
+  padding: 20px 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-brand-bottom {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.footer-brand-bottom img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+}
+
+.footer-brand-bottom div {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-brand-bottom b {
+  color: #ffffff;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+.footer-brand-bottom span {
+  color: #888888;
+  font-size: 13px;
+}
+
+.copy {
+  color: #888888;
+  font-size: 13px;
+  text-align: right;
+}
